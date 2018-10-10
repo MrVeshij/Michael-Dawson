@@ -1,0 +1,3 @@
+String 1
+That string 2
+And another string with number 3 
