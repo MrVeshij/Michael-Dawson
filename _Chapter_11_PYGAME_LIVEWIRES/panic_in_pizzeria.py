@@ -71,6 +71,7 @@ class Pizza(games.Sprite):
         games.screen.add(end_message)
 
 
+
 class Chef(games.Sprite):
     """Chef whom throw pizza move left - right"""
     image = games.load_image('chef.bmp')

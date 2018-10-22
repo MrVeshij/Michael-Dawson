@@ -30,7 +30,7 @@ points = 0
 word_player = None
 
 while True:
-    word_player = input('Word change with anagram. Guess his.==={}===\n'.format(shuffle_word))
+    word_player = input('Word change with anagram. Guess his:\n==={}===\n'.format(shuffle_word))
     if word_player == check_word:
         if count == 0:
             points = 10
