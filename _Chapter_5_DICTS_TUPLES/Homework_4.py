@@ -4,10 +4,10 @@
 
 
 
-dict_pairs = {'Vova':['Jenia','Kostia'],
-              'Oksana':['Vova', 'Oleg'],
-              'Jenia':['Kostia', 'Petr'],
-              'Masha':['Kostia', 'Petr']}
+dict_pairs = {'vova':['Jenia','Kostia'],
+              'oksana':['Vova', 'Oleg'],
+              'jenia':['Kostia', 'Petr'],
+              'masha':['Kostia', 'Petr']}
 
 while True:
     print("""
@@ -15,10 +15,11 @@ while True:
     Enter name and you learn.
     ------------------------------------------------------------------
     stop - finish
-    add - add new pair
+    add - add or change pair
     del - delete existing pair
     """)
-    request = input('Waiting for input: \n')
+    request = input('Waiting for input: \n').lower()
+    print(request)
     if request == 'stop' : break
     elif request in dict_pairs : print('His father is {}, and grandfather {}'.format(dict_pairs[request][0],dict_pairs[request][1]))
     elif request == 'add' : dict_pairs[input('Enter name child\n')] = input('Enter name father\n'), input('Enter name grandfather\n')
