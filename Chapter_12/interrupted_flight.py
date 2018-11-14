@@ -207,7 +207,7 @@ class Game():
     def play(self): # Метод запускающий игру
         games.music.load('theme.mid') # Загружает в память музыку
         games.music.play(-1) # Начинает ее проигрывать
-        nebula_image = games.load_image('nebula.jpg') # Создает фон
+        nebula_image = games.load_image('nebula.jpg', transparent = False) # Создает фон
         games.screen.background = nebula_image # Загружает фон
         self.advance() # Толкает игру на уровень 1 , создается астероид, на экране появляется надпись о первом уровне
         games.screen.mainloop()
