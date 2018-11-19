@@ -1,9 +1,63 @@
+from tkinter import *
+
+
+
 FIELD = [0,1,2,3,4,5,6,7,8]
 VICTORY_CELLS = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
 BEST_MOVES = (4,0,2,6,8,1,3,5,7)
 TRICKY_MOVES = ((0,8),(2,6))
 BUST_TRICK = 5
 CHECK_LIST = ('0','1','2','3','4','5','6','7','8','9')
+
+
+class Application(Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.grid()
+        self.create_widgets()
+
+
+
+
+    def create_widgets(self):
+        a = '{}'
+        Button(self,
+               text = a,
+               command = a.format('new')
+               ).grid(row = 0, column = 0, sticky = W)
+        Button(self,
+               text = '1',
+               command = None
+               ).grid(row = 0, column = 1, sticky = W)
+        Button(self,
+               text = '2',
+               command = None
+               ).grid(row = 0, column = 2, sticky = W)
+        Button(self,
+               text='3',
+               command=None
+               ).grid(row=1, column=0, sticky=W)
+        Button(self,
+               text='4',
+               command=None
+               ).grid(row=1, column=1, sticky=W)
+        Button(self,
+               text='5',
+               command=None
+               ).grid(row=1, column=2, sticky=W)
+        Button(self,
+               text='6',
+               command=None
+               ).grid(row=2, column=0, sticky=W)
+        Button(self,
+               text='7',
+               command=None
+               ).grid(row=2, column=1, sticky=W)
+        Button(self,
+               text='8',
+               command=None
+               ).grid(row=2, column=2, sticky=W)
+
 
 def intro():
     print(" The game with name Cross-Zero."
@@ -13,10 +67,8 @@ def intro():
 def print_field(field):
     """Print current field with all changes"""
     count = 0
-    check = 0
     for i in field:
         count += 1
-        check += 1
         if count < 3:
             if i in range(9):
                 print('[ ', '_' , ' ]', end="")
@@ -24,18 +76,9 @@ def print_field(field):
         else:
             count = 0
             if i in range(9):
-                print('[ ', '_', ' ]',end="")
-            else: print('[ ', i, ' ]', end="")
-            if check == 3:
-                print('      ','[ ', 0, ' ]','[ ', 1, ' ]','[ ', 1, ' ]')
-                print('---------------------       ----------------------')
-            if check == 6:
-                print('      ', '[ ', 3, ' ]', '[ ', 4, ' ]', '[ ', 5, ' ]')
-                print('---------------------       ----------------------')
-            if check == 9:
-                print('      ', '[ ', 6, ' ]', '[ ', 7, ' ]', '[ ', 8, ' ]')
-                print('---------------------       ----------------------')
-            print('')
+                print('[ ', '_', ' ]')
+            else: print('[ ', i, ' ]')
+            print('---------------------')
 
 
 def sign_hum():
@@ -137,4 +180,12 @@ def main():
     game(field, human, computer, turn)
     print('Thanks for game, goodbye.')
 
-main()
+#main()
+
+def main_tkinter():
+    root = Tk()
+    root.title('Cross-Zero')
+    app = Application(root)
+    app.mainloop()
+
+main_tkinter()
