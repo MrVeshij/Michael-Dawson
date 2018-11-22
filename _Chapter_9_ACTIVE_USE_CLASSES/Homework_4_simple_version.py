@@ -42,16 +42,6 @@ class Player():
         print('\nHero move to', landscape)
         self.current_landscape = landscape
 
-    def print_map(self,map):
-        """Print current map with all changes"""
-        count = 0
-        for i in map:
-            count += 1
-            if count < 3:
-                print('[ ', i, ' ]', end="")
-            else:
-                count = 0
-                print('[ ', i, ' ]', end="")
 
 
 class Landscape():
@@ -65,8 +55,6 @@ class Landscape():
 
 
 
-
-
 class Game():
     def __init__(self):
         self.player = Player()
@@ -75,10 +63,6 @@ class Game():
         self.city = Landscape('City', 3)
         self.cave = Landscape('Cave', 4)
         self.field = Landscape('Field', 5)
-        self.field = Landscape('Mount', 6)
-        self.field = Landscape('Alone house', 7)
-        self.field = Landscape('Forest', 8)
-        self.field = Landscape('Inn', 9)
         self.places = [self.valley, self.town, self.city, self.cave, self.field]
 
 
@@ -93,6 +77,8 @@ class Game():
             for place in self.places:
                 if choice == place.numb_matrix:
                     self.player.move(place)
+
+
 
 
 
