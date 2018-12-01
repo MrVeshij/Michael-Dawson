@@ -46,6 +46,8 @@ class Application(Frame):
 
     def update_text(self):
         """Update text element after user choose himself loved genres"""
+        # В данном методе переменная likes каждый раз перезаписывается что приводит к тому
+        # что строки располагаются в той последовательности что задаются внутри функции
         likes = ''
         if self.likes_comedy.get():
             likes += 'You like comedy.\n'

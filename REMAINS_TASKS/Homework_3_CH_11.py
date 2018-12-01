@@ -40,8 +40,8 @@ class Ball(games.Sprite):
         super().__init__(Ball.image,
                          x = 50,
                          y = 320,
-                         dx = 1,
-                         dy = 1)
+                         dx = 60,
+                         dy = 60)
 
 
     def update(self):
@@ -59,6 +59,20 @@ class Ball(games.Sprite):
         if self.top <= 0:
             self.dx = -self.dx
             self.dy = -self.dy
+        if self.x > games.screen.width:
+            self.game_over()
+
+
+    def game_over(self):
+        """Declares gameover"""
+        gameover = games.Message(value = 'Game Over',
+                                    size = 90,
+                                    color = color.red,
+                                    x = games.screen.width/2,
+                                    y = games.screen.height/2,
+                                    lifetime = 2 * games.screen.fps, # Спрайт живет 5 секунд
+                                    after_death = games.screen.quit)
+        games.screen.add(gameover)
 
 
 

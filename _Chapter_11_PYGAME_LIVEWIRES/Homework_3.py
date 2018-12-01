@@ -31,35 +31,75 @@ class Rocket(games.Sprite):
 
     def update(self):
         self.y = games.mouse.y
+        self.strike_ball()
+
+
+    def strike_ball(self):
+        """Beats ball backwards"""
+        for ball in self.overlapping_sprites:
+            ball.dx = -ball.dx
+            ball.dy = ball.dy
+
 
 
 
 class Ball(games.Sprite):
     image = games.load_image('ball.bmp')
     def __init__(self):
+        self.count = 0
         super().__init__(Ball.image,
                          x = 50,
                          y = 320,
-                         dx = 1,
-                         dy = 1)
+                         dx = 2,
+                         dy = 2)
 
 
     def update(self):
         self.check_walls()
+        if self.count in range(0, 10000, 100):
+            self.increase_difficult()
+        self.count += 1
 
 
     def check_walls(self):
         """Check fall ball on wall and change his course"""
         if self.bottom >= games.screen.height:
-            self.dx = -self.dx
+            self.dx = self.dx
             self.dy = -self.dy
         if self.left <= 0:
             self.dx = -self.dx
-            self.dy = -self.dy
+            self.dy = self.dy
         if self.top <= 0:
-            self.dx = -self.dx
+            self.dx = self.dx
             self.dy = -self.dy
+        if self.right > games.screen.width + 50:
+            self.game_over()
 
+
+    def increase_difficult(self):
+        """Increase speed ball"""
+        if self.dx < 0:
+            self.dx -= 0.1
+        else:
+            self.dx += 0.1
+
+        if self.dy < 0:
+            self.dy -= 0.1
+        else:
+            self.dy += 0.1
+        print('speed dx',self.dx,'speed dy',self.dy)
+
+
+    def game_over(self):
+        """Declares gameover"""
+        gameover = games.Message(value = 'Game Over',
+                                    size = 90,
+                                    color = color.red,
+                                    x = games.screen.width/2,
+                                    y = games.screen.height/2,
+                                    lifetime = 2 * games.screen.fps, # Спрайт живет 5 секунд
+                                    after_death = games.screen.quit)
+        games.screen.add(gameover)
 
 
 def main():

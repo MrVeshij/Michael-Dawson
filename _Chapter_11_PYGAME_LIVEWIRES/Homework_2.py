@@ -67,9 +67,10 @@ class GG(games.Sprite):
     def check_catch(self):
         for rock in self.overlapping_sprites:
             self.end_game()
-            self.copy = rock.x
-            rock.dy = 0
-            self.check = 1
+            if not self.check:
+                self.copy = rock.x
+                rock.dy = 0
+                self.check = 1
             # Как заставить застыть упвший на голову булыжник
             # Решил вопрос перекопированием, теперь я понимаю что такое глубина в программирование)
             # И то что я херовый пловец
