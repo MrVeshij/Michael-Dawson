@@ -32,9 +32,13 @@ class Pan(games.Sprite):
             if self.score.value in range(100, 1000, 100):
                 pizza.speed_up()
                 self.alert()
-            if self.score.value == 400:
+            if self.score.value == 10:
+                print('speed',self.chef.dx)
+                print('odds change', self.chef.odds_change)
                 self.chef.speed_change()
                 self.alert()
+                print(self.chef.dx)
+                print(self.chef.odds_change)
             if self.score.value in range(500, 1500, 200):
                 self.bottom -= 20
                 self.alert()
