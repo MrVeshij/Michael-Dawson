@@ -32,13 +32,83 @@
 
 from livewires import games, color
 
+games.init()
+
+
+class Hero(games.Sprite):
+    """Main hero, may move up, down, left, right, drop bomb, catch stuff(key, improvements), if
+     hero go in door, level up. If hero meets enemy, he lost one life, if life < 0 - game over"""
+    hero_image = games.load_image('bomberman/Hero_4.bmp')
+    def __init__(self):
+        super().__init__(image=Hero.hero_image, x=games.screen.width/2, y=games.screen.height/2)
+
+
+    def update(self):
+        if games.keyboard.is_pressed(games.K_w):
+            self.y -= 1
+        if games.keyboard.is_pressed(games.K_s):
+            self.y += 1
+        if games.keyboard.is_pressed(games.K_a):
+            self.x -= 1
+        if games.keyboard.is_pressed(games.K_d):
+            self.x += 1
+
+        if self.x > games.screen.width - 30:
+            self.x = games.screen.width - 30
+        if self.x < 30:
+            self.x = 30
+        if self.y > games.screen.height - 30:
+            self.y = games.screen.height - 30
+        if self.y < 30:
+            self.y = 30
+
+        self.drop_bomb()
+
+
+    def drop_bomb(self):
+        if games.keyboard.is_pressed(games.K_SPACE):
+            bomb = Bomb(x=self.x, y=self.y)
+            games.screen.add(bomb)
+
+
+class Enemy(games.Sprite):
+    pass
+
+
+
+class Block(games.Sprite):
+    pass
+
+
+
+class Bomb(games.Sprite):
+    image = games.load_image('bomberman/bomb_1.jpg')
+    def __init__(self, x, y):
+        super().__init__(image=Bomb.image, x=x, y=y)
+        self.time_life = 50
+
+    def update(self):
+        if self.time_life > 0:
+            self.time_life -= 1
+        else:
+            self.destroy()
+
+
+
+
+
+class Boss(games.Sprite):
+    pass
+
+
 
 
 
 def main():
-    games.init()
-    s = games.load_image('nebula.jpg')
-    games.screen.background = s
+    background = games.load_image('bomberman/fone_grass(1_3).jpg', transparent=False)
+    games.screen.background = background
+    hero = Hero()
+    games.screen.add(hero)
     games.screen.mainloop()
 
 main()
